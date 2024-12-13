@@ -1,0 +1,170 @@
+
+Módulo 13 – Laboratório guiado 2: Implementar uma arquitetura serveless na AWS
+
+
+13/12/2024
+
+
+1. Executar pilha no CloudFormation para criar tabela no DynamoDB
+
+
+Tarefa 1: Criar uma função do Lambda para carregar dados de arquivo CSV do S3 para uma tabela no DynamoDB.
+
+=> No Console de Gerenciamento da AWS, selecione Lambda
+
+-> Botão "Criar função"
+
+-> Criar do zero
+
+-> Nome da função: Load-Inventory
+
+-> Tempo de execução [Runtime]: Python 3.10
+
+
+=> Expandir: Alterar a função de execução padrão
+
+-> Usar uma função existente
+
+-> Função existente: LabRole
+
+-> Botão "Criar função"
+
+------------------------------
+
+=> Após a função Lambda criada, na seção "Origem do código"
+
+-> Botão "Fazer upload de" Arquivo .zip, selecionar o arquivo "lambda_function.zip"
+
+Obs.: Ao fazer o upload do arquivo .zip, o Deploy é feito automaticamente
+
+
+###################################################################################
+
+
+Tarefa 2: Criar Bucket configurar um evento do Amazon S3
+
+=> Entrar no console do S3 e criar Bucket
+
+-> Nome do bucket: inventory-<xxxxxx>
+
+------------------------------
+
+=> Após o Bucket criado, clicar no seu nome e selecionar a guia "Propriedades"
+
+-> Na seção "Notificações de eventos", botão "Criar notificação de evento"
+- Nome do evento: Load-Inventory
+
+
+-> Na seção "Tipos de evento"
+- Marcar -> Todos os eventos de criação de objeto
+
+
+-> Na seção "Destino"
+- Marcar -> Função do Lambda
+
+-> Função do Lambda: Load-Inventory
+
+-> Botão "Salvar alterações"
+
+
+###################################################################################
+
+
+Tarefa 3: Testar o processo de carregamento do arquivo de inventário CSV para o Bucket S3
+
+=> Carregar qualquer arquivo de inventário CSV para o Bucket do S3
+
+
+=> No DynamoDB
+
+
+###################################################################################
+
+
+Tarefa 4: Configurar notificações por e-mail pelo SNS
+
+=> Abra o console do serviço SNS [Simple Notification Service]
+
+-> Menu "Tópicos", Botão "Criar tópico"
+
+-> Na seção "Detalhes"
+
+- Tipo: Padrão [Default]
+
+- Nome: NoStock
+
+-> Botão "Criar tópico"
+
+
+Obs.: Para receber notificações, você deve assinar o tópico. 
+Pode-se optar por receber notificações por vários métodos, como SMS e e-mail.  
+
+------------------------------
+
+=> Após o tópico do SNS criado, botão "Criar assinatura"
+
+- Protocolo: E-mail
+- Endpoint: <email>@<provedor>
+
+-> Botão "Criar assinatura"
+
+
+Obs.: Será enviado um e-mail com link de confirmação para a conta cadastrada.
+
+
+###################################################################################
+
+
+Tarefa 5: criar uma função do Lambda para enviar notificações
+
+
+=> No Console de Gerenciamento da AWS, selecione Lambda
+
+-> Botão "Criar função"
+
+-> Criar do zero
+
+-> Nome da função: Check-Stock
+
+-> Tempo de execução [Runtime]: Python 3.10
+
+
+=> Expandir: Alterar a função de execução padrão
+
+-> Usar uma função existente
+
+-> Função existente: LabRole
+
+-> Botão "Criar função"
+
+------------------------------
+
+=> Após a função Lambda criada, na seção "Origem do código"
+
+-> Botão "Fazer upload de" Arquivo .zip, selecionar o arquivo "lambda_function_sns.zip"
+
+Obs.: Ao fazer o upload do arquivo .zip, o Deploy é feito automaticamente
+
+
+
+=> Configurar a função para que ela seja acionada quando os dados forem adicionados 
+   à tabela Inventory (Inventário) no DynamoDB.
+
+-> Na seção "Visão geral da função", selecionar "Adicionar gatilho"
+
+- Selecionar uma origem: DynamoDB
+
+- Tabela do DynamoDB: Inventory
+
+-> Botão "Adicionar"
+
+
+###################################################################################
+
+
+Tarefa 6: Testar todo o sistema
+
+
+###################################################################################
+
+
