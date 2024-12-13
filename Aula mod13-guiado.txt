@@ -5,10 +5,13 @@ Módulo 13 – Laboratório guiado 2: Implementar uma arquitetura serveless na A
 13/12/2024
 
 
-1. Executar pilha no CloudFormation para criar tabela no DynamoDB
+Tarefa 0: Executar pilha no CloudFormation para criar tabela no DynamoDB
 
 
-Tarefa 1: Criar uma função do Lambda para carregar dados de arquivo CSV do S3 para uma tabela no DynamoDB.
+###################################################################################
+
+
+Tarefa 1: Criar uma função Lambda para carregar dados de arquivo CSV do S3 para uma tabela no DynamoDB.
 
 => No Console de Gerenciamento da AWS, selecione Lambda
 
@@ -18,7 +21,7 @@ Tarefa 1: Criar uma função do Lambda para carregar dados de arquivo CSV do S3 
 
 -> Nome da função: Load-Inventory
 
--> Tempo de execução [Runtime]: Python 3.10
+-> Tempo de execução [Runtime]: Python 3.12
 
 
 => Expandir: Alterar a função de execução padrão
@@ -35,13 +38,13 @@ Tarefa 1: Criar uma função do Lambda para carregar dados de arquivo CSV do S3 
 
 -> Botão "Fazer upload de" Arquivo .zip, selecionar o arquivo "lambda_function.zip"
 
-Obs.: Ao fazer o upload do arquivo .zip, o Deploy é feito automaticamente
+Obs.: Ao fazer o upload do arquivo .zip, o deploy é feito automaticamente
 
 
 ###################################################################################
 
 
-Tarefa 2: Criar Bucket configurar um evento do Amazon S3
+Tarefa 2: Criar Bucket e configurar um evento do Amazon S3
 
 => Entrar no console do S3 e criar Bucket
 
@@ -115,7 +118,7 @@ Obs.: Será enviado um e-mail com link de confirmação para a conta cadastrada.
 ###################################################################################
 
 
-Tarefa 5: criar uma função do Lambda para enviar notificações
+Tarefa 5: Criar uma função Lambda para enviar notificações
 
 
 => No Console de Gerenciamento da AWS, selecione Lambda
@@ -126,7 +129,7 @@ Tarefa 5: criar uma função do Lambda para enviar notificações
 
 -> Nome da função: Check-Stock
 
--> Tempo de execução [Runtime]: Python 3.10
+-> Tempo de execução [Runtime]: Python 3.12
 
 
 => Expandir: Alterar a função de execução padrão
@@ -143,7 +146,7 @@ Tarefa 5: criar uma função do Lambda para enviar notificações
 
 -> Botão "Fazer upload de" Arquivo .zip, selecionar o arquivo "lambda_function_sns.zip"
 
-Obs.: Ao fazer o upload do arquivo .zip, o Deploy é feito automaticamente
+Obs.: Ao fazer o upload do arquivo .zip, o deploy é feito automaticamente
 
 
 
